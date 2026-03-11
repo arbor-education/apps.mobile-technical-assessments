@@ -1,0 +1,16 @@
+name: apps.mobile-technical-assessments
+id: ari:cloud:compass:11899d26-bb2d-40fc-ab1f-b3684abeac91:component/7cbd16b6-ee7a-4db3-95bc-23ec0c19fefd/378fe075-d69c-4d85-b60c-62b122ae9a42
+description: A public repository for the mobile team's technical assessments.
+configVersion: 1
+typeId: SERVICE
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/arbor-education/apps.mobile-technical-assessments
+relationships:
+  DEPENDS_ON: []
+labels:
+  - source:github
+customFields: null
