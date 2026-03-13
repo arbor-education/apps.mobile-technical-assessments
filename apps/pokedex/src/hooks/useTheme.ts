@@ -5,6 +5,11 @@ export const useTheme = () => {
   const dispatch = useAppDispatch();
   const mode = useAppSelector((state) => state.theme.mode);
 
+  const handleThemeToggle = () => {
+    const newTheme = mode === "light" ? "dark" : "light";
+    dispatch(toggleTheme());
+  }
+
   return {
     mode,
     isDark: mode === "dark",

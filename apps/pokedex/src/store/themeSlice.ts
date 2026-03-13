@@ -1,4 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  getStorageValue,
+  setStorageValue,
+  StorageKeys,
+} from "@pokedex/utils/storage";
 
 type ThemeMode = "light" | "dark";
 
@@ -7,7 +12,7 @@ type ThemeState = {
 };
 
 const initialState: ThemeState = {
-  mode: "light",
+  mode: (getStorageValue(StorageKeys.Theme) as ThemeMode) || "light",
 };
 
 export const themeSlice = createSlice({
@@ -18,7 +23,9 @@ export const themeSlice = createSlice({
       state.mode = action.payload;
     },
     toggleTheme: (state) => {
-      state.mode = state.mode === "light" ? "dark" : "light";
+      const newState = state.mode === "light" ? "dark" : "light";
+      state.mode = newState;
+      setStorageValue(StorageKeys.Theme, newState);
     },
   },
 });
