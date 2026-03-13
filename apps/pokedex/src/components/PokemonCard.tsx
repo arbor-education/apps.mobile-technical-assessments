@@ -1,10 +1,11 @@
 import React from "react";
 import { Image, StyleSheet } from "react-native";
-import type { Pokemon } from "@arbor-apps/db";
-import { Text, TypeIcon, XStack } from "@arbor-apps/ui";
+import { Text, TypeIcon, XStack, YStack, View } from "@arbor-apps/ui";
+import { PokemonWithUserPokemon } from "@pokedex/services/pokemonService";
+import { StatusIndicator } from "@pokedex/components/StatusIndicator";
 
 type Props = {
-  pokemon: Pokemon;
+  pokemon: PokemonWithUserPokemon;
   onPress?: () => void;
 };
 
@@ -18,14 +19,21 @@ export const PokemonCard = ({ pokemon, onPress }: Props) => (
     gap="$2"
   >
     <Image source={{ uri: pokemon.spriteUrl }} style={styles.sprite} />
-    <XStack items="center" justify="space-between" f={1}>
-      <Text variant="p2" fow="600" tt="capitalize">
-        {pokemon.name}
-      </Text>
-      <XStack gap="$2">
-        <TypeIcon type={pokemon.type1} size={20} />
-        {pokemon.type2 && <TypeIcon type={pokemon.type2} size={20} />}
+    <YStack gap="$1" f={1}>
+      <XStack items="center" justify="space-between" f={1}>
+        <Text variant="p2" fow="600" tt="capitalize">
+          {pokemon.name}
+        </Text>
       </XStack>
+      <XStack>
+        <View>
+          <StatusIndicator status={pokemon.userPokemon?.status} />
+        </View>
+      </XStack>
+    </YStack>
+    <XStack gap="$2">
+      <TypeIcon type={pokemon.type1} size={20} />
+      {pokemon.type2 && <TypeIcon type={pokemon.type2} size={20} />}
     </XStack>
   </XStack>
 );

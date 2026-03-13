@@ -2,6 +2,10 @@ import { database } from "@arbor-apps/db";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Q } from "@nozbe/watermelondb";
 import type { UserPokemon, UserPokemonStatus } from "@arbor-apps/db";
+import {
+  pokemonQueryKeys,
+  type PokemonWithUserPokemon,
+} from "./pokemonService";
 
 export const userPokemonQueryKeys = {
   byUser: (userId: string) => ["user_pokemon", userId] as const,
@@ -33,30 +37,46 @@ export const useUpdatePokemonStatus = () => {
       userId: string;
       pokemonId: string;
       status: UserPokemonStatus;
-    }) => {
+    }): Promise<UserPokemon> => {
       const collection = database.get<UserPokemon>("user_pokemon");
       const existing = await collection
         .query(Q.where("user_id", userId), Q.where("pokemon_id", pokemonId))
         .fetch();
 
-      await database.write(async () => {
+      return database.write(async () => {
         if (existing.length > 0) {
-          await existing[0].update((record) => {
-            record.status = status;
-          });
-        } else {
-          await collection.create((record) => {
-            record.userId = userId;
-            record.pokemonId = pokemonId;
+          return existing[0].update((record) => {
             record.status = status;
           });
         }
+        return collection.create((record) => {
+          record.userId = userId;
+          record.pokemonId = pokemonId;
+          record.status = status;
+        });
       });
     },
-    onSuccess: (_data, { userId, pokemonId }) => {
-      queryClient.invalidateQueries({
-        queryKey: userPokemonQueryKeys.byUserAndPokemon(userId, pokemonId),
-      });
+    onSuccess: (userPokemon, { userId, pokemonId }) => {
+      queryClient.setQueryData(
+        userPokemonQueryKeys.byUserAndPokemon(userId, pokemonId),
+        userPokemon,
+      );
+      queryClient.setQueryData(
+        pokemonQueryKeys.list(userId),
+        (old: PokemonWithUserPokemon[] | undefined) =>
+          old?.map((p) => {
+            if (p.id !== pokemonId) return p;
+            return Object.create(Object.getPrototypeOf(p), {
+              ...Object.getOwnPropertyDescriptors(p),
+              userPokemon: {
+                value: userPokemon,
+                writable: true,
+                enumerable: true,
+                configurable: true,
+              },
+            }) as PokemonWithUserPokemon;
+          }),
+      );
     },
   });
 };
