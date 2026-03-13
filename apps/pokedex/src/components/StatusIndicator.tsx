@@ -1,12 +1,14 @@
 import { Text, XStack } from "@arbor-apps/ui";
 import { GetThemeValueForKey } from "tamagui";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 type StatusIndicatorProps = {
   status?: string | null;
 };
 
 export const StatusIndicator = ({ status }: StatusIndicatorProps) => {
+  const { t } = useTranslation();
   const statusColors: Record<string, string> = {
     hunting: "#FF87CF",
     caught: "#86FEA4",
@@ -28,7 +30,7 @@ export const StatusIndicator = ({ status }: StatusIndicatorProps) => {
       f={1}
     >
       <Text fow="900" tt="uppercase" c="$background" variant="p5">
-        {status ?? "Not Started"}
+        {t(`pokemon.status.${status || "notStarted"}`)}
       </Text>
     </XStack>
   );

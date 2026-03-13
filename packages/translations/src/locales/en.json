@@ -25,7 +25,9 @@
       "hunting": "Hunting",
       "caught": "Caught",
       "shiny": "Shiny",
-      "ignored": "Ignored"
+      "ignored": "Ignored",
+      "notStarted": "Not Started",
+      "myStatus": "My Status"
     }
   },
   "settings": {

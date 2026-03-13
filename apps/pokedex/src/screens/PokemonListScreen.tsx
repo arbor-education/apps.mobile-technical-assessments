@@ -1,7 +1,10 @@
 import React, { useCallback } from "react";
 import { FlatList } from "react-native";
 import { router } from "expo-router";
-import { usePokemonList } from "@pokedex/services/pokemonService";
+import {
+  PokemonWithUserPokemon,
+  usePokemonList,
+} from "@pokedex/services/pokemonService";
 import { PokemonCard } from "@pokedex/components/PokemonCard";
 import { useTranslation } from "@arbor-apps/translations";
 import type { Pokemon } from "@arbor-apps/db";
@@ -15,7 +18,7 @@ export const PokemonListScreen = () => {
   const keyExtractor = useCallback((item: Pokemon) => item.id, []);
 
   const renderItem = useCallback(
-    ({ item }: { item: Pokemon }) => (
+    ({ item }: { item: PokemonWithUserPokemon }) => (
       <PokemonCard
         pokemon={item}
         onPress={() => router.push(`/pokemon/${item.id}`)}

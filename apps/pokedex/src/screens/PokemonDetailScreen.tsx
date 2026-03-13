@@ -70,7 +70,7 @@ export const PokemonDetailScreen = () => {
           {pokemon.type2 && <TypeIcon type={pokemon.type2} size={20} />}
         </XStack>
         <Text variant="h5" mt="$6" self="flex-start">
-          My Status
+          {t("pokemon.status.myStatus")}
         </Text>
         <StatusPicker
           currentStatus={userPokemon?.status ?? null}
