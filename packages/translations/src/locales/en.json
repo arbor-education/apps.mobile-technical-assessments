@@ -41,6 +41,10 @@
     "theme": "Theme",
     "dark": "Dark",
     "light": "Light",
-    "logout": "Logout"
+    "logout": "Logout",
+    "languageNames": {
+      "english": "English",
+      "cymraeg": "Cymraeg"
+    }
   }
 }

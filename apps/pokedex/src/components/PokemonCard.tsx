@@ -1,6 +1,13 @@
 import React from "react";
 import { Image, StyleSheet } from "react-native";
-import { Text, TypeIcon, XStack, YStack, View } from "@arbor-apps/ui";
+import {
+  Text,
+  TypeIcon,
+  XStack,
+  YStack,
+  View,
+  PokemonType,
+} from "@arbor-apps/ui";
 import { PokemonWithUserPokemon } from "@pokedex/services/pokemonService";
 import { StatusIndicator } from "@pokedex/components/StatusIndicator";
 
@@ -32,8 +39,10 @@ export const PokemonCard = ({ pokemon, onPress }: Props) => (
       </XStack>
     </YStack>
     <XStack gap="$2">
-      <TypeIcon type={pokemon.type1} size={20} />
-      {pokemon.type2 && <TypeIcon type={pokemon.type2} size={20} />}
+      <TypeIcon type={pokemon.type1 as PokemonType} size={20} />
+      {pokemon.type2 && (
+        <TypeIcon type={pokemon.type2 as PokemonType} size={20} />
+      )}
     </XStack>
   </XStack>
 );

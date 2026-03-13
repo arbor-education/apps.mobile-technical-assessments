@@ -2,7 +2,7 @@ import React from "react";
 import { Button as TamaguiButton } from "tamagui";
 import { colors } from "./tamagui.config";
 
-export type ButtonVariant = "primary" | "secondary" | "outline";
+export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 
 export type ButtonProps = {
   text: string;
@@ -17,10 +17,12 @@ export const Button = ({
   onClick,
   disabled,
 }: ButtonProps) => {
+  const handlePress = disabled ? undefined : onClick;
+
   if (variant === "secondary") {
     return (
       <TamaguiButton
-        onPress={onClick}
+        onPress={handlePress}
         disabled={disabled}
         br="$4"
         bg="$color3"
@@ -34,13 +36,29 @@ export const Button = ({
   if (variant === "outline") {
     return (
       <TamaguiButton
-        onPress={onClick}
+        onPress={handlePress}
         disabled={disabled}
         br="$4"
         bg="transparent"
         color={colors.primary}
         bow={1}
         boc={colors.primary}
+      >
+        {text}
+      </TamaguiButton>
+    );
+  }
+
+  if (variant === "ghost") {
+    return (
+      <TamaguiButton
+        onPress={handlePress}
+        disabled={disabled}
+        chromeless
+        bg="transparent"
+        color={colors.primary}
+        px="$2"
+        py="$1"
       >
         {text}
       </TamaguiButton>

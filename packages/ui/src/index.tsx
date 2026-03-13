@@ -13,4 +13,7 @@ export { TextInput } from "./TextInput";
 export type { TextInputProps } from "./TextInput";
 export { YStack, XStack, View, useTheme } from "tamagui";
 export { TypeIcon } from "./TypeIcon";
-export { Computer, Settings2, ChevronLeft } from "@tamagui/lucide-icons";
+export { PokemonStatus } from "./PokemonStatus";
+export { POKEMON_TYPES } from "./constants";
+export type { PokemonType } from "./constants";
+export { Computer, Settings2, ChevronLeft, Check } from "@tamagui/lucide-icons";

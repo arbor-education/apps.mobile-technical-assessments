@@ -5,6 +5,13 @@ import { User } from "./User";
 
 export type UserPokemonStatus = "hunting" | "caught" | "shiny" | "ignored";
 
+export const USER_POKEMON_STATUSES: readonly UserPokemonStatus[] = [
+  "hunting",
+  "caught",
+  "shiny",
+  "ignored",
+] as const;
+
 export class UserPokemon extends Model {
   static table = "user_pokemon";
 

@@ -41,6 +41,10 @@
     "theme": "Thema",
     "dark": "Tywyll",
     "light": "Golau",
-    "logout": "Allgofnodi"
+    "logout": "Allgofnodi",
+    "languageNames": {
+      "english": "English",
+      "cymraeg": "Cymraeg"
+    }
   }
 }

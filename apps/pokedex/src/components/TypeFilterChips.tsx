@@ -1,54 +1,41 @@
 import React from "react";
-import { ScrollView, TouchableOpacity, StyleSheet } from "react-native";
+import { ScrollView } from "react-native";
 import { useTranslation } from "@arbor-apps/translations";
-import { Text, TypeIcon, useTheme } from "@arbor-apps/ui";
+import { Text, TypeIcon, XStack, POKEMON_TYPES } from "@arbor-apps/ui";
 import { useAppDispatch, useAppSelector } from "@pokedex/store";
 import { setTypeFilter, clearFilters } from "@pokedex/store/filterSlice";
 
-const POKEMON_TYPES = [
-  "normal",
-  "fire",
-  "water",
-  "grass",
-  "electric",
-  "ice",
-  "fighting",
-  "poison",
-  "ground",
-  "flying",
-  "psychic",
-  "bug",
-  "rock",
-  "ghost",
-  "dragon",
-  "dark",
-  "steel",
-  "fairy",
-] as const;
+const CHIP_SIZE = 45;
 
 export const TypeFilterChips = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const activeType = useAppSelector((state) => state.filter.activeType);
-  const theme = useTheme();
 
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.container}
-      style={styles.scroll}
+      contentContainerStyle={{
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        gap: 8,
+        flexDirection: "row",
+        alignItems: "center",
+      }}
+      style={{ flexGrow: 0 }}
     >
-      <TouchableOpacity
+      <XStack
+        width={CHIP_SIZE}
+        height={CHIP_SIZE}
+        br={CHIP_SIZE / 2}
+        bow={1}
+        boc="$borderColor"
+        bg={activeType === null ? "$primary" : "$background"}
+        items="center"
+        justify="center"
         onPress={() => dispatch(clearFilters())}
-        style={[
-          styles.chip,
-          {
-            backgroundColor:
-              activeType === null ? theme.primary.val : theme.background.val,
-            borderColor: theme.borderColor.val,
-          },
-        ]}
+        pressStyle={{ opacity: 0.7 }}
       >
         <Text
           variant="p4"
@@ -57,47 +44,25 @@ export const TypeFilterChips = () => {
         >
           {t("pokemon.allTypes")}
         </Text>
-      </TouchableOpacity>
+      </XStack>
 
       {POKEMON_TYPES.map((type) => (
-        <TouchableOpacity
+        <XStack
           key={type}
+          width={CHIP_SIZE}
+          height={CHIP_SIZE}
+          br={CHIP_SIZE / 2}
+          bow={1}
+          boc="$borderColor"
+          bg={activeType === type ? "$primary" : "$background"}
+          items="center"
+          justify="center"
           onPress={() => dispatch(setTypeFilter(type))}
-          style={[
-            styles.chip,
-            {
-              backgroundColor:
-                activeType === type ? theme.primary.val : theme.background.val,
-              borderColor: theme.borderColor.val,
-            },
-          ]}
+          pressStyle={{ opacity: 0.7 }}
         >
           <TypeIcon type={type} size={20} />
-        </TouchableOpacity>
+        </XStack>
       ))}
     </ScrollView>
   );
 };
-
-const CHIP_SIZE = 45;
-
-const styles = StyleSheet.create({
-  scroll: {
-    flexGrow: 0,
-  },
-  container: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    gap: 8,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  chip: {
-    width: CHIP_SIZE,
-    height: CHIP_SIZE,
-    borderRadius: CHIP_SIZE / 2,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -25,7 +25,10 @@ export default [
       parser: tsParser,
       ecmaVersion: "latest",
       sourceType: "module",
-      globals: arborEslintGlobals,
+      globals: {
+        ...arborEslintGlobals,
+        beforeEach: "readonly",
+      },
     },
     rules: {
       ...typescriptEslint.configs.recommended.rules,

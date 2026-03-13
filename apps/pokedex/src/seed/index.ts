@@ -33,7 +33,7 @@ export const seedDatabase = async (): Promise<void> => {
           database.collections.get<Pokemon>("pokemon").create((pokemon) => {
             pokemon.name = name;
             pokemon.type1 = type1;
-            pokemon.type2 = type2;
+            if (type2) pokemon.type2 = type2;
 
             if (sprite) pokemon.spriteUrl = sprite;
             if (shinySprite) pokemon.shinySpriteUrl = shinySprite;

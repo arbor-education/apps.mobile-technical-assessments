@@ -1,5 +1,6 @@
 {
   "extends": "../../packages/typescript-config/react-native-library.json",
+  "exclude": ["dist", "build", "node_modules", "eslint.config.mjs"],
   "compilerOptions": {
     "experimentalDecorators": true
   }

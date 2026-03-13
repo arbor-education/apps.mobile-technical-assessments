@@ -43,7 +43,11 @@ export const SettingsScreen = () => {
       >
         <Text variant="p2">{t("settings.language")}</Text>
         <Button
-          text={currentLang === "en" ? "English" : "Cymraeg"}
+          text={
+            currentLang === "en"
+              ? t("settings.languageNames.english")
+              : t("settings.languageNames.cymraeg")
+          }
           variant="secondary"
           onClick={handleLanguageToggle}
         />

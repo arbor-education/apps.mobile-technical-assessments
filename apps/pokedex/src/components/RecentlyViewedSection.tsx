@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { ScrollView, Image } from "react-native";
 import { router } from "expo-router";
 import { useTranslation } from "@arbor-apps/translations";
 import { Text, YStack } from "@arbor-apps/ui";
@@ -21,34 +21,27 @@ export const RecentlyViewedSection = () => {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.container}
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          gap: 8,
+          flexDirection: "row",
+        }}
       >
         {pokemon.map((p) => (
-          <TouchableOpacity
+          <YStack
             key={p.id}
+            items="center"
+            width={72}
             onPress={() => router.push(`/pokemon/${p.id}`)}
-            style={styles.card}
+            pressStyle={{ opacity: 0.7 }}
           >
-            <Image source={{ uri: p.spriteUrl }} style={styles.sprite} />
-          </TouchableOpacity>
+            <Image
+              source={{ uri: p.spriteUrl }}
+              style={{ width: 64, height: 64 }}
+            />
+          </YStack>
         ))}
       </ScrollView>
     </YStack>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 16,
-    gap: 8,
-    flexDirection: "row",
-  },
-  card: {
-    alignItems: "center",
-    width: 72,
-  },
-  sprite: {
-    width: 64,
-    height: 64,
-  },
-});

@@ -7,14 +7,16 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
   },
-  "devDependencies": {
-    "eslint": "*",
-    "eslint-config-prettier": "*",
-    "eslint-plugin-prettier": "*",
-    "globals": "*",
-    "typescript": "*",
+  "dependencies": {
     "@eslint/js": "*",
     "@typescript-eslint/eslint-plugin": "*",
-    "@typescript-eslint/parser": "*"
+    "@typescript-eslint/parser": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-prettier": "*",
+    "globals": "*"
+  },
+  "devDependencies": {
+    "eslint": "*",
+    "typescript": "*"
   }
 }

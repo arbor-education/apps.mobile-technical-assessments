@@ -3,13 +3,14 @@ import * as TypeIcons from "./svg/types";
 import { FC } from "react";
 import React from "react";
 import { SvgProps } from "react-native-svg";
+import type { PokemonType } from "./constants";
 
 type TypeIconProps = {
   size?: number;
-  type: string;
+  type: PokemonType;
 };
 
-const TYPE_MAP: Record<string, { icon: FC<SvgProps>; bg: string }> = {
+const TYPE_MAP: Record<PokemonType, { icon: FC<SvgProps>; bg: string }> = {
   bug: {
     icon: TypeIcons.BugIcon,
     bg: "#93BC2D",

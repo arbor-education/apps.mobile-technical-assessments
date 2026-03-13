@@ -1,5 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
+  "exclude": ["dist", "build", "node_modules", "eslint.config.mjs"],
   "compilerOptions": {
     "strict": true,
     "experimentalDecorators": true,

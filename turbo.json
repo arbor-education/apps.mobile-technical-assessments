@@ -7,6 +7,11 @@
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
       "dependsOn": ["^build"]
     },
+    "type-check": {
+      "cache": true,
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", "tsconfig.json"],
+      "outputs": []
+    },
     "dev": {
       "cache": false,
       "persistent": true
@@ -19,6 +24,10 @@
     },
     "clean": {
       "cache": false
+    },
+    "test": {
+      "dependsOn": [],
+      "outputs": ["coverage/**"]
     }
   }
 }

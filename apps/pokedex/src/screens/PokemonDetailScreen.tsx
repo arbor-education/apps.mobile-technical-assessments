@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Image,
-  ActivityIndicator,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { Image, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { usePokemonById } from "@pokedex/services/pokemonService";
 import {
@@ -23,9 +18,9 @@ import {
   colors,
   TypeIcon,
   ChevronLeft,
-  tamaguiConfig,
+  PokemonType,
 } from "@arbor-apps/ui";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@arbor-apps/translations";
 
 export const PokemonDetailScreen = () => {
   const { t } = useTranslation();
@@ -56,23 +51,33 @@ export const PokemonDetailScreen = () => {
   return (
     <PageContainer scrollable safeAreaTop>
       <XStack items="center" px="$4" py="$3" justify="center">
-        <TouchableOpacity onPress={() => router.back()} style={styles.back}>
-          <XStack gap="$2" items="center">
-            <ChevronLeft c="$primary" />
-            <Text variant="p1" c="$primary">
-              {t("common.back")}
-            </Text>
-          </XStack>
-        </TouchableOpacity>
+        <XStack
+          onPress={() => router.back()}
+          position="absolute"
+          l="$4"
+          gap="$2"
+          items="center"
+          pressStyle={{ opacity: 0.7 }}
+        >
+          <ChevronLeft c="$primary" />
+          <Text variant="p1" c="$primary">
+            {t("common.back")}
+          </Text>
+        </XStack>
         <Text variant="h4" tt="capitalize">
           {pokemon.name}
         </Text>
       </XStack>
       <YStack items="center" p="$6">
-        <Image source={{ uri: pokemon.spriteUrl }} style={styles.sprite} />
+        <Image
+          source={{ uri: pokemon.spriteUrl }}
+          style={{ width: 160, height: 160 }}
+        />
         <XStack gap="$2" mt="$2">
-          <TypeIcon type={pokemon.type1} size={20} />
-          {pokemon.type2 && <TypeIcon type={pokemon.type2} size={20} />}
+          <TypeIcon type={pokemon.type1 as PokemonType} size={20} />
+          {pokemon.type2 && (
+            <TypeIcon type={pokemon.type2 as PokemonType} size={20} />
+          )}
         </XStack>
         <Text variant="h5" mt="$6" self="flex-start">
           {t("pokemon.status.myStatus")}
@@ -85,11 +90,3 @@ export const PokemonDetailScreen = () => {
     </PageContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  sprite: { width: 160, height: 160 },
-  back: {
-    position: "absolute",
-    left: tamaguiConfig.tokens.space["4"].val ?? 16,
-  },
-});

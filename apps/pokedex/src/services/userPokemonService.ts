@@ -6,6 +6,13 @@ import {
   pokemonQueryKeys,
   type PokemonWithUserPokemon,
 } from "./pokemonService";
+import { useAppSelector } from "@pokedex/store";
+
+const findUserPokemon = (userId: string, pokemonId: string) =>
+  database
+    .get<UserPokemon>("user_pokemon")
+    .query(Q.where("user_id", userId), Q.where("pokemon_id", pokemonId))
+    .fetch();
 
 export const userPokemonQueryKeys = {
   byUser: (userId: string) => ["user_pokemon", userId] as const,
@@ -17,16 +24,13 @@ export const useUserPokemon = (userId: string, pokemonId: string) =>
   useQuery({
     queryKey: userPokemonQueryKeys.byUserAndPokemon(userId, pokemonId),
     queryFn: () =>
-      database
-        .get<UserPokemon>("user_pokemon")
-        .query(Q.where("user_id", userId), Q.where("pokemon_id", pokemonId))
-        .fetch()
-        .then((results) => results[0] ?? null),
+      findUserPokemon(userId, pokemonId).then((results) => results[0] ?? null),
     enabled: !!userId && !!pokemonId,
   });
 
 export const useUpdatePokemonStatus = () => {
   const queryClient = useQueryClient();
+  const activeType = useAppSelector((state) => state.filter.activeType);
 
   return useMutation({
     mutationFn: async ({
@@ -39,9 +43,7 @@ export const useUpdatePokemonStatus = () => {
       status: UserPokemonStatus;
     }): Promise<UserPokemon> => {
       const collection = database.get<UserPokemon>("user_pokemon");
-      const existing = await collection
-        .query(Q.where("user_id", userId), Q.where("pokemon_id", pokemonId))
-        .fetch();
+      const existing = await findUserPokemon(userId, pokemonId);
 
       return database.write(async () => {
         if (existing.length > 0) {
@@ -62,7 +64,7 @@ export const useUpdatePokemonStatus = () => {
         userPokemon,
       );
       queryClient.setQueryData(
-        pokemonQueryKeys.list(userId),
+        pokemonQueryKeys.list(userId, activeType),
         (old: PokemonWithUserPokemon[] | undefined) =>
           old?.map((p) => {
             if (p.id !== pokemonId) return p;
