@@ -10,7 +10,13 @@ import { TypeFilterChips } from "@pokedex/components/TypeFilterChips";
 import { RecentlyViewedSection } from "@pokedex/components/RecentlyViewedSection";
 import { useTranslation } from "@arbor-apps/translations";
 import type { Pokemon } from "@arbor-apps/db";
-import { Text, YStack, PageContainer, useTheme } from "@arbor-apps/ui";
+import {
+  Text,
+  YStack,
+  PageContainer,
+  useTheme,
+  defaultConfig,
+} from "@arbor-apps/ui";
 
 export const PokemonListScreen = () => {
   const { t } = useTranslation();
@@ -59,7 +65,9 @@ export const PokemonListScreen = () => {
         windowSize={5}
         initialNumToRender={15}
         style={{ flex: 1, backgroundColor: theme.background.val }}
-        contentContainerStyle={{ paddingHorizontal: 16 }}
+        contentContainerStyle={{
+          paddingHorizontal: defaultConfig.tokens.space[4],
+        }}
         ListEmptyComponent={
           <YStack f={1} justify="center" items="center" py="$8">
             <Text variant="p2">{t("pokemon.noResults")}</Text>

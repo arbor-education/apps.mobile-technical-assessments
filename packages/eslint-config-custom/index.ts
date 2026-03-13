@@ -28,6 +28,7 @@ export default [
       globals: {
         ...arborEslintGlobals,
         beforeEach: "readonly",
+        afterEach: "readonly",
       },
     },
     rules: {

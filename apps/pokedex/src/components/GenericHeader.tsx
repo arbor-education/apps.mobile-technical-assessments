@@ -1,6 +1,6 @@
 import { ChevronLeft, Text, XStack } from "@arbor-apps/ui";
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@arbor-apps/translations";
 import { router } from "expo-router";
 
 type GenericHeaderProps = {

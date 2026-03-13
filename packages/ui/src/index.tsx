@@ -17,3 +17,4 @@ export { PokemonStatus } from "./PokemonStatus";
 export { POKEMON_TYPES } from "./constants";
 export type { PokemonType } from "./constants";
 export { Computer, Settings2, ChevronLeft, Check } from "@tamagui/lucide-icons";
+export { defaultConfig } from "@tamagui/config/v4";

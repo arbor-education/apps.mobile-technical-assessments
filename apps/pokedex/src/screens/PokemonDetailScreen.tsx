@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { Image, ActivityIndicator } from "react-native";
-import { useLocalSearchParams, router } from "expo-router";
+import { Image, ActivityIndicator, StyleSheet } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 import { usePokemonById } from "@pokedex/services/pokemonService";
 import {
   useUserPokemon,
   useUpdatePokemonStatus,
 } from "@pokedex/services/userPokemonService";
 import { StatusPicker } from "@pokedex/components/StatusPicker";
+import { GenericHeader } from "@pokedex/components/GenericHeader";
 import { useAuth } from "@pokedex/hooks/useAuth";
 import { addRecentlyViewed } from "@pokedex/hooks/useRecentlyViewed";
 import type { UserPokemonStatus } from "@arbor-apps/db";
@@ -17,7 +18,6 @@ import {
   YStack,
   colors,
   TypeIcon,
-  ChevronLeft,
   PokemonType,
 } from "@arbor-apps/ui";
 import { useTranslation } from "@arbor-apps/translations";
@@ -50,29 +50,9 @@ export const PokemonDetailScreen = () => {
 
   return (
     <PageContainer scrollable safeAreaTop>
-      <XStack items="center" px="$4" py="$3" justify="center">
-        <XStack
-          onPress={() => router.back()}
-          position="absolute"
-          l="$4"
-          gap="$2"
-          items="center"
-          pressStyle={{ opacity: 0.7 }}
-        >
-          <ChevronLeft c="$primary" />
-          <Text variant="p1" c="$primary">
-            {t("common.back")}
-          </Text>
-        </XStack>
-        <Text variant="h4" tt="capitalize">
-          {pokemon.name}
-        </Text>
-      </XStack>
+      <GenericHeader hasBackButton title={pokemon.name} />
       <YStack items="center" p="$6">
-        <Image
-          source={{ uri: pokemon.spriteUrl }}
-          style={{ width: 160, height: 160 }}
-        />
+        <Image source={{ uri: pokemon.spriteUrl }} style={styles.sprite} />
         <XStack gap="$2" mt="$2">
           <TypeIcon type={pokemon.type1 as PokemonType} size={20} />
           {pokemon.type2 && (
@@ -90,3 +70,7 @@ export const PokemonDetailScreen = () => {
     </PageContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  sprite: { width: 160, height: 160 },
+});

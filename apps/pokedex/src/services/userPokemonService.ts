@@ -68,15 +68,7 @@ export const useUpdatePokemonStatus = () => {
         (old: PokemonWithUserPokemon[] | undefined) =>
           old?.map((p) => {
             if (p.id !== pokemonId) return p;
-            return Object.create(Object.getPrototypeOf(p), {
-              ...Object.getOwnPropertyDescriptors(p),
-              userPokemon: {
-                value: userPokemon,
-                writable: true,
-                enumerable: true,
-                configurable: true,
-              },
-            }) as PokemonWithUserPokemon;
+            return Object.assign(p, { userPokemon });
           }),
       );
     },

@@ -2,6 +2,7 @@ import React from "react";
 import { GetThemeValueForKey, XStack } from "tamagui";
 import { Text } from "./Text";
 
+// Pokemon status colours — not theme tokens (app-domain palette, not light/dark aware)
 const statusColors: Record<string, string> = {
   hunting: "#FF87CF",
   caught: "#86FEA4",

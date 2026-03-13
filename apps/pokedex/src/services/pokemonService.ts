@@ -8,6 +8,9 @@ export type PokemonWithUserPokemon = Pokemon & {
   userPokemon: UserPokemon | null;
 };
 
+const buildTypeQuery = (type: string) =>
+  Q.or(Q.where("type1", type), Q.where("type2", type));
+
 export const pokemonQueryKeys = {
   all: ["pokemon"] as const,
   list: (userId: string | null, activeType: string | null) =>
@@ -24,11 +27,7 @@ export const usePokemonList = () => {
     queryKey: pokemonQueryKeys.list(userId, activeType),
     queryFn: async () => {
       const pokemonQuery = activeType
-        ? database
-            .get<Pokemon>("pokemon")
-            .query(
-              Q.or(Q.where("type1", activeType), Q.where("type2", activeType)),
-            )
+        ? database.get<Pokemon>("pokemon").query(buildTypeQuery(activeType))
         : database.get<Pokemon>("pokemon").query();
       const pokemon = await pokemonQuery.fetch();
       const userPokemonList = userId
@@ -58,10 +57,7 @@ export const usePokemonByType = (type: string) =>
   useQuery({
     queryKey: pokemonQueryKeys.byType(type),
     queryFn: () =>
-      database
-        .get<Pokemon>("pokemon")
-        .query(Q.or(Q.where("type1", type), Q.where("type2", type)))
-        .fetch(),
+      database.get<Pokemon>("pokemon").query(buildTypeQuery(type)).fetch(),
     enabled: !!type,
   });
 

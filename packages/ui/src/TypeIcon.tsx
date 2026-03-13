@@ -10,6 +10,7 @@ type TypeIconProps = {
   type: PokemonType;
 };
 
+// Pokemon type colours — not theme tokens (fixed game-canon palette, not light/dark aware)
 const TYPE_MAP: Record<PokemonType, { icon: FC<SvgProps>; bg: string }> = {
   bug: {
     icon: TypeIcons.BugIcon,

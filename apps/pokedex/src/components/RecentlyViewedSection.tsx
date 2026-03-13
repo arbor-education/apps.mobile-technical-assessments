@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, Image } from "react-native";
 import { router } from "expo-router";
 import { useTranslation } from "@arbor-apps/translations";
-import { Text, YStack } from "@arbor-apps/ui";
+import { Text, YStack, defaultConfig } from "@arbor-apps/ui";
 import { useRecentlyViewed } from "@pokedex/hooks/useRecentlyViewed";
 import { usePokemonsByIds } from "@pokedex/services/pokemonService";
 
@@ -22,8 +22,8 @@ export const RecentlyViewedSection = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
-          paddingHorizontal: 16,
-          gap: 8,
+          paddingHorizontal: defaultConfig.tokens.space[4],
+          gap: defaultConfig.tokens.space[2],
           flexDirection: "row",
         }}
       >

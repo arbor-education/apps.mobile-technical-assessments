@@ -3,6 +3,10 @@ import {
   storeActiveToken,
   getActiveToken,
   deactivateActiveToken,
+  setStorageValue,
+  getStorageValue,
+  deleteStorageValue,
+  StorageKeys,
 } from "@pokedex/utils/storage";
 
 describe("parseToken", () => {
@@ -34,5 +38,30 @@ describe("deactivateActiveToken", () => {
     storeActiveToken("bob", "pw");
     deactivateActiveToken();
     expect(getActiveToken()).toBeNull();
+  });
+});
+
+describe("setStorageValue / getStorageValue / deleteStorageValue", () => {
+  afterEach(() => {
+    deleteStorageValue(StorageKeys.Theme);
+  });
+
+  it("stores and retrieves a string value", () => {
+    setStorageValue(StorageKeys.Theme, "dark");
+    expect(getStorageValue(StorageKeys.Theme)).toBe("dark");
+  });
+
+  it("returns undefined after deleteStorageValue", () => {
+    setStorageValue(StorageKeys.Theme, "light");
+    expect(getStorageValue(StorageKeys.Theme)).toBe("light");
+    deleteStorageValue(StorageKeys.Theme);
+    expect(getStorageValue(StorageKeys.Theme)).toBeUndefined();
+  });
+
+  it("overwrites an existing value", () => {
+    setStorageValue(StorageKeys.Theme, "light");
+    expect(getStorageValue(StorageKeys.Theme)).toBe("light");
+    setStorageValue(StorageKeys.Theme, "dark");
+    expect(getStorageValue(StorageKeys.Theme)).toBe("dark");
   });
 });
