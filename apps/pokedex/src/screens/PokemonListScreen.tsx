@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList } from "react-native";
 import { router } from "expo-router";
 import { usePokemonList } from "@pokedex/services/pokemonService";
 import { PokemonCard } from "@pokedex/components/PokemonCard";
 import { useTranslation } from "@arbor-apps/translations";
 import type { Pokemon } from "@arbor-apps/db";
-import { Text, YStack } from "@arbor-apps/ui";
+import { Text, YStack, View } from "@arbor-apps/ui";
 
 export const PokemonListScreen = () => {
   const { t } = useTranslation();
@@ -40,8 +40,9 @@ export const PokemonListScreen = () => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View f={1} px="$4">
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={pokemon}
         keyExtractor={keyExtractor}
         renderItem={renderItem}

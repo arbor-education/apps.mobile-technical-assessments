@@ -11,5 +11,5 @@ export { PageContainer } from "./PageContainer";
 export type { PageContainerProps } from "./PageContainer";
 export { TextInput } from "./TextInput";
 export type { TextInputProps } from "./TextInput";
-export { YStack, XStack } from "tamagui";
+export { YStack, XStack, View } from "tamagui";
 export { TypeIcon } from "./TypeIcon";

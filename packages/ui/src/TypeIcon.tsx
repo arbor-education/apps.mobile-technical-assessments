@@ -5,8 +5,7 @@ import React from "react";
 import { SvgProps } from "react-native-svg";
 
 type TypeIconProps = {
-  width?: number;
-  height?: number;
+  size?: number;
   type: string;
 };
 
@@ -79,13 +78,13 @@ const TYPE_MAP: Record<string, { icon: FC<SvgProps>; bg: string }> = {
     icon: TypeIcons.SteelIcon,
     bg: "#5795A3",
   },
-water: {
+  water: {
     icon: TypeIcons.WaterIcon,
     bg: "#549CDF",
   },
 };
 
-export const TypeIcon = ({ width = 40, height = 40, type }: TypeIconProps) => {
+export const TypeIcon = ({ size = 40, type }: TypeIconProps) => {
   const map = TYPE_MAP[type];
   if (!map) return null;
 
@@ -97,10 +96,10 @@ export const TypeIcon = ({ width = 40, height = 40, type }: TypeIconProps) => {
       justify="center"
       bg={bg as unknown as GetThemeValueForKey<"bg">}
       p="$2"
-      br={width}
+      br={size}
     >
       <YStack>
-        <Icon width={width} height={height} />
+        <Icon width={size} height={size} />
       </YStack>
     </XStack>
   );

@@ -9,7 +9,14 @@ import {
 import { StatusPicker } from "@pokedex/components/StatusPicker";
 import { useAuth } from "@pokedex/hooks/useAuth";
 import type { UserPokemonStatus } from "@arbor-apps/db";
-import { PageContainer, Text, XStack, YStack, colors } from "@arbor-apps/ui";
+import {
+  PageContainer,
+  Text,
+  XStack,
+  YStack,
+  colors,
+  TypeIcon,
+} from "@arbor-apps/ui";
 
 export const PokemonDetailScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -40,18 +47,8 @@ export const PokemonDetailScreen = () => {
           {pokemon.name}
         </Text>
         <XStack gap="$2" mt="$2">
-          <YStack px="$3" py="$1" br={12} bg="$primary">
-            <Text variant="p4" c="white" tt="capitalize" fow="600">
-              {pokemon.type1}
-            </Text>
-          </YStack>
-          {pokemon.type2 ? (
-            <YStack px="$3" py="$1" br={12} bg="$primary">
-              <Text variant="p4" c="white" tt="capitalize" fow="600">
-                {pokemon.type2}
-              </Text>
-            </YStack>
-          ) : null}
+          <TypeIcon type={pokemon.type1} size={20} />
+          {pokemon.type2 && <TypeIcon type={pokemon.type2} size={20} />}
         </XStack>
         <Text variant="h5" mt="$6" self="flex-start">
           My Status

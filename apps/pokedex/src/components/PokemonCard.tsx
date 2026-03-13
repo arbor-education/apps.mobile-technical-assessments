@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 import type { Pokemon } from "@arbor-apps/db";
-import { Text, XStack, YStack } from "@arbor-apps/ui";
+import { Text, TypeIcon, XStack } from "@arbor-apps/ui";
 
 type Props = {
   pokemon: Pokemon;
@@ -11,21 +11,22 @@ type Props = {
 export const PokemonCard = ({ pokemon, onPress }: Props) => (
   <XStack
     items="center"
-    p="$3"
+    py="$3"
     borderBottomWidth={1}
     borderBottomColor="$borderColor"
     onPress={onPress}
+    gap="$2"
   >
     <Image source={{ uri: pokemon.spriteUrl }} style={styles.sprite} />
-    <YStack ml="$3">
+    <XStack items="center" justify="space-between" f={1}>
       <Text variant="p2" fow="600" tt="capitalize">
         {pokemon.name}
       </Text>
-      <Text variant="p4" c="$textMuted" mt="$1">
-        {pokemon.type1}
-        {pokemon.type2 ? ` / ${pokemon.type2}` : ""}
-      </Text>
-    </YStack>
+      <XStack gap="$2">
+        <TypeIcon type={pokemon.type1} size={20} />
+        {pokemon.type2 && <TypeIcon type={pokemon.type2} size={20} />}
+      </XStack>
+    </XStack>
   </XStack>
 );
 
