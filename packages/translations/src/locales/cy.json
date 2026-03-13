@@ -25,7 +25,9 @@
       "hunting": "Hela",
       "caught": "Dal",
       "shiny": "Disglair",
-      "ignored": "Anwybyddu"
+      "ignored": "Anwybyddu",
+      "notStarted": "Heb ei dechrau",
+      "myStatus": "Eich Statws"
     }
   },
   "settings": {
