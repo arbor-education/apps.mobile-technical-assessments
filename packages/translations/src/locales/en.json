@@ -21,6 +21,11 @@
       "psychic": "Psychic", "bug": "Bug", "rock": "Rock", "ghost": "Ghost",
       "dragon": "Dragon", "dark": "Dark", "steel": "Steel", "fairy": "Fairy"
     },
+    "filterByType": "Filter by type",
+    "allTypes": "All",
+    "noResults": "No Pokémon found.",
+    "recentlyViewed": "Recently Viewed",
+    "noRecentlyViewed": "No recently viewed Pokémon.",
     "status": {
       "hunting": "Hunting",
       "caught": "Caught",

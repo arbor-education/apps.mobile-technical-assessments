@@ -10,17 +10,27 @@ export type PokemonWithUserPokemon = Pokemon & {
 
 export const pokemonQueryKeys = {
   all: ["pokemon"] as const,
-  list: (userId: string | null) => ["pokemon", "list", userId] as const,
+  list: (userId: string | null, activeType: string | null) =>
+    ["pokemon", "list", userId, activeType] as const,
   detail: (id: string) => ["pokemon", id] as const,
   byType: (type: string) => ["pokemon", "type", type] as const,
+  byIds: (ids: string[]) => ["pokemon", "byIds", ids] as const,
 };
 
 export const usePokemonList = () => {
   const userId = useAppSelector((state) => state.user.userId);
+  const activeType = useAppSelector((state) => state.filter.activeType);
   return useQuery({
-    queryKey: pokemonQueryKeys.list(userId),
+    queryKey: pokemonQueryKeys.list(userId, activeType),
     queryFn: async () => {
-      const pokemon = await database.get<Pokemon>("pokemon").query().fetch();
+      const pokemonQuery = activeType
+        ? database
+            .get<Pokemon>("pokemon")
+            .query(
+              Q.or(Q.where("type1", activeType), Q.where("type2", activeType)),
+            )
+        : database.get<Pokemon>("pokemon").query();
+      const pokemon = await pokemonQuery.fetch();
       const userPokemonList = userId
         ? await database
             .get<UserPokemon>("user_pokemon")
@@ -53,4 +63,27 @@ export const usePokemonByType = (type: string) =>
         .query(Q.or(Q.where("type1", type), Q.where("type2", type)))
         .fetch(),
     enabled: !!type,
+  });
+
+export const usePokemonsByIds = (ids: string[]) =>
+  useQuery({
+    queryKey: pokemonQueryKeys.byIds(ids),
+    queryFn: async () => {
+      if (ids.length === 0) return [];
+      const results = await Promise.all(
+        ids.map((id) =>
+          database
+            .get<Pokemon>("pokemon")
+            .find(id)
+            .catch(() => null),
+        ),
+      );
+      const pokemonById = new Map(
+        results.filter((p): p is Pokemon => p !== null).map((p) => [p.id, p]),
+      );
+      return ids
+        .map((id) => pokemonById.get(id))
+        .filter((p): p is Pokemon => p !== null);
+    },
+    enabled: ids.length > 0,
   });

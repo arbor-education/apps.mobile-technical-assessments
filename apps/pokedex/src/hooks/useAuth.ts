@@ -9,6 +9,7 @@ import {
   refreshActiveToken,
   parseToken,
 } from "@pokedex/utils/storage";
+import { clearRecentlyViewed } from "@pokedex/hooks/useRecentlyViewed";
 
 export const useAuth = () => {
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ export const useAuth = () => {
 
   const logout = () => {
     deactivateActiveToken();
+    clearRecentlyViewed();
     dispatch(clearUser());
   };
 

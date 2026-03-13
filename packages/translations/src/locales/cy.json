@@ -21,6 +21,11 @@
       "psychic": "Seicig", "bug": "Pryfed", "rock": "Craig", "ghost": "Ysbryd",
       "dragon": "Draig", "dark": "Tywyll", "steel": "Dur", "fairy": "Tylwyth"
     },
+    "filterByType": "Hidlo yn ôl math",
+    "allTypes": "Pob un",
+    "noResults": "Dim Pokémon wedi'i ganfod.",
+    "recentlyViewed": "Wedi'u Gweld yn Ddiweddar",
+    "noRecentlyViewed": "Dim Pokémon wedi'u gweld yn ddiweddar.",
     "status": {
       "hunting": "Hela",
       "caught": "Dal",

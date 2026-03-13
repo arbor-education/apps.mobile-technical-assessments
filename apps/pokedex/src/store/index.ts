@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { userSlice } from "./userSlice";
 import { themeSlice } from "./themeSlice";
+import { filterSlice } from "./filterSlice";
 
 export const store = configureStore({
   reducer: {
     user: userSlice.reducer,
     theme: themeSlice.reducer,
+    filter: filterSlice.reducer,
   },
   devTools: false,
   enhancers: (getDefaultEnhancers) => {

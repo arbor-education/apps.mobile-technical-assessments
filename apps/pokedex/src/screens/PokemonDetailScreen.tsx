@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Image,
   ActivityIndicator,
@@ -13,6 +13,7 @@ import {
 } from "@pokedex/services/userPokemonService";
 import { StatusPicker } from "@pokedex/components/StatusPicker";
 import { useAuth } from "@pokedex/hooks/useAuth";
+import { addRecentlyViewed } from "@pokedex/hooks/useRecentlyViewed";
 import type { UserPokemonStatus } from "@arbor-apps/db";
 import {
   PageContainer,
@@ -34,6 +35,10 @@ export const PokemonDetailScreen = () => {
   const { data: pokemon, isLoading } = usePokemonById(id);
   const { data: userPokemon } = useUserPokemon(userId ?? "", id);
   const { mutate: updateStatus } = useUpdatePokemonStatus();
+
+  useEffect(() => {
+    if (id) addRecentlyViewed(id);
+  }, [id]);
 
   const handleStatusSelect = (status: UserPokemonStatus) => {
     if (!userId) return;
