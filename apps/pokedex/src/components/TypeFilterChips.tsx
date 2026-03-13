@@ -41,6 +41,7 @@ export const TypeFilterChips = () => {
           variant="p4"
           fow="700"
           c={activeType === null ? "$background" : "$color"}
+          ta="center"
         >
           {t("pokemon.allTypes")}
         </Text>
