@@ -16,7 +16,7 @@ const ThemeWrapper = ({ children }: { children: React.ReactNode }) => {
 
 export default function RootLayout() {
   useEffect(() => {
-    seedDatabase();
+    void seedDatabase();
   }, []);
 
   return (
@@ -26,7 +26,10 @@ export default function RootLayout() {
           <Stack>
             <Stack.Screen name="login" options={{ headerShown: false }} />
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="pokemon/[id]" options={{ title: "" }} />
+            <Stack.Screen
+              name="pokemon/[id]"
+              options={{ headerShown: false }}
+            />
           </Stack>
         </ThemeWrapper>
       </QueryClientProvider>

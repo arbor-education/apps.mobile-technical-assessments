@@ -29,7 +29,7 @@ export const SettingsScreen = () => {
   };
 
   return (
-    <PageContainer p="$6">
+    <PageContainer p="$6" safeAreaTop>
       <Text variant="h2" mb="$8">
         {t("settings.title")}
       </Text>

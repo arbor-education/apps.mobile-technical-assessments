@@ -11,5 +11,6 @@ export { PageContainer } from "./PageContainer";
 export type { PageContainerProps } from "./PageContainer";
 export { TextInput } from "./TextInput";
 export type { TextInputProps } from "./TextInput";
-export { YStack, XStack, View } from "tamagui";
+export { YStack, XStack, View, useTheme } from "tamagui";
 export { TypeIcon } from "./TypeIcon";
+export { Computer, Settings2, ChevronLeft } from "@tamagui/lucide-icons";

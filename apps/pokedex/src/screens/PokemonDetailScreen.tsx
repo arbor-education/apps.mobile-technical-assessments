@@ -1,6 +1,11 @@
 import React from "react";
-import { Image, ActivityIndicator, StyleSheet } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import {
+  Image,
+  ActivityIndicator,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { useLocalSearchParams, router } from "expo-router";
 import { usePokemonById } from "@pokedex/services/pokemonService";
 import {
   useUserPokemon,
@@ -16,9 +21,13 @@ import {
   YStack,
   colors,
   TypeIcon,
+  ChevronLeft,
+  tamaguiConfig,
 } from "@arbor-apps/ui";
+import { useTranslation } from "react-i18next";
 
 export const PokemonDetailScreen = () => {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { userId } = useAuth();
 
@@ -40,12 +49,22 @@ export const PokemonDetailScreen = () => {
   }
 
   return (
-    <PageContainer scrollable>
-      <YStack items="center" p="$6">
-        <Image source={{ uri: pokemon.spriteUrl }} style={styles.sprite} />
-        <Text variant="h2" tt="capitalize" mt="$2">
+    <PageContainer scrollable safeAreaTop>
+      <XStack items="center" px="$4" py="$3" justify="center">
+        <TouchableOpacity onPress={() => router.back()} style={styles.back}>
+          <XStack gap="$2" items="center">
+            <ChevronLeft c="$primary" />
+            <Text variant="p1" c="$primary">
+              {t("common.back")}
+            </Text>
+          </XStack>
+        </TouchableOpacity>
+        <Text variant="h4" tt="capitalize">
           {pokemon.name}
         </Text>
+      </XStack>
+      <YStack items="center" p="$6">
+        <Image source={{ uri: pokemon.spriteUrl }} style={styles.sprite} />
         <XStack gap="$2" mt="$2">
           <TypeIcon type={pokemon.type1} size={20} />
           {pokemon.type2 && <TypeIcon type={pokemon.type2} size={20} />}
@@ -64,4 +83,8 @@ export const PokemonDetailScreen = () => {
 
 const styles = StyleSheet.create({
   sprite: { width: 160, height: 160 },
+  back: {
+    position: "absolute",
+    left: tamaguiConfig.tokens.space["4"].val ?? 16,
+  },
 });

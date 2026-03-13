@@ -3,9 +3,6 @@ import { createTamagui } from "tamagui";
 
 export const colors = {
   primary: "#E53E3E",
-  textDark: "#333333",
-  textMuted: "#666666",
-  borderMuted: "#cccccc",
 } as const;
 
 const shorthands = {
@@ -29,16 +26,32 @@ const shorthands = {
   tt: "textTransform",
 } as const;
 
+const lightTheme = {
+  ...defaultConfig.themes.light,
+  textDark: "#333333",
+  textMuted: "#666666",
+  borderMuted: "#cccccc",
+};
+
+const darkTheme = {
+  ...defaultConfig.themes.dark,
+  textDark: "#f0f0f0",
+  textMuted: "#999999",
+  borderMuted: "#444444",
+};
+
 export const tamaguiConfig = createTamagui({
   ...defaultConfig,
   tokens: {
     ...defaultConfig.tokens,
     color: {
       primary: colors.primary,
-      textDark: colors.textDark,
-      textMuted: colors.textMuted,
-      borderMuted: colors.borderMuted,
     },
+  },
+  themes: {
+    ...defaultConfig.themes,
+    light: lightTheme,
+    dark: darkTheme,
   },
   shorthands,
 });

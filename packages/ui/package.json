@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tamagui/config": "^1.121.6",
+    "@tamagui/lucide-icons": "^1.121.6",
     "react-native-svg": "^15.15.3",
     "tamagui": "^1.121.6"
   },

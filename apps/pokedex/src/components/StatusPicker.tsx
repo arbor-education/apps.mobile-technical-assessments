@@ -26,7 +26,7 @@ export const StatusPicker = ({ currentStatus, onSelect }: Props) => (
         >
           <Text
             variant="p3"
-            c={isActive ? "white" : "$textDark"}
+            c={isActive ? "white" : "$textMuted"}
             fow={isActive ? "600" : "400"}
           >
             {status.charAt(0).toUpperCase() + status.slice(1)}

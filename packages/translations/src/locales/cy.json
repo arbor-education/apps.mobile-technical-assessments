@@ -2,7 +2,8 @@
   "common": {
     "loading": "Llwytho...",
     "error": "Aeth rhywbeth o'i le.",
-    "retry": "Ailgeisio"
+    "retry": "Ailgeisio",
+    "back": "Yn ol"
   },
   "auth": {
     "title": "Pokédex",
