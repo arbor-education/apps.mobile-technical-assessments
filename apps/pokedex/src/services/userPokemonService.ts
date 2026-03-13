@@ -1,0 +1,62 @@
+import { database } from "@arbor-apps/db";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Q } from "@nozbe/watermelondb";
+import type { UserPokemon, UserPokemonStatus } from "@arbor-apps/db";
+
+export const userPokemonQueryKeys = {
+  byUser: (userId: string) => ["user_pokemon", userId] as const,
+  byUserAndPokemon: (userId: string, pokemonId: string) =>
+    ["user_pokemon", userId, pokemonId] as const,
+};
+
+export const useUserPokemon = (userId: string, pokemonId: string) =>
+  useQuery({
+    queryKey: userPokemonQueryKeys.byUserAndPokemon(userId, pokemonId),
+    queryFn: () =>
+      database
+        .get<UserPokemon>("user_pokemon")
+        .query(Q.where("user_id", userId), Q.where("pokemon_id", pokemonId))
+        .fetch()
+        .then((results) => results[0] ?? null),
+    enabled: !!userId && !!pokemonId,
+  });
+
+export const useUpdatePokemonStatus = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      userId,
+      pokemonId,
+      status,
+    }: {
+      userId: string;
+      pokemonId: string;
+      status: UserPokemonStatus;
+    }) => {
+      const collection = database.get<UserPokemon>("user_pokemon");
+      const existing = await collection
+        .query(Q.where("user_id", userId), Q.where("pokemon_id", pokemonId))
+        .fetch();
+
+      await database.write(async () => {
+        if (existing.length > 0) {
+          await existing[0].update((record) => {
+            record.status = status;
+          });
+        } else {
+          await collection.create((record) => {
+            record.userId = userId;
+            record.pokemonId = pokemonId;
+            record.status = status;
+          });
+        }
+      });
+    },
+    onSuccess: (_data, { userId, pokemonId }) => {
+      queryClient.invalidateQueries({
+        queryKey: userPokemonQueryKeys.byUserAndPokemon(userId, pokemonId),
+      });
+    },
+  });
+};

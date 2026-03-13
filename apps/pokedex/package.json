@@ -1,0 +1,62 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "test": "jest --watchAll",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "dependencies": {
+    "@arbor-apps/db": "*",
+    "@arbor-apps/translations": "*",
+    "@arbor-apps/ui": "*",
+    "@nozbe/watermelondb": "^0.27.1",
+    "@nozbe/with-observables": "^1.4.0",
+    "@reduxjs/toolkit": "^2.11.2",
+    "@tanstack/react-query": "^5.80.7",
+    "expo": "54.0.33",
+    "expo-constants": "18.0.13",
+    "expo-linking": "8.0.11",
+    "expo-router": "6.0.23",
+    "expo-status-bar": "3.0.9",
+    "expo-system-ui": "6.0.9",
+    "i18next": "^23.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-i18next": "^14.0.0",
+    "react-native": "0.81.5",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "4.16.0",
+    "react-native-svg": "15.12.1",
+    "react-native-web": "^0.21.0",
+    "react-redux": "^9.2.0",
+    "redux-devtools-expo-dev-plugin": "^2.0.0"
+  },
+  "devDependencies": {
+    "@arbor-apps/eslint-config-custom": "*",
+    "@babel/core": "^7.23.7",
+    "@babel/plugin-proposal-decorators": "^7.24.0",
+    "@tamagui/babel-plugin": "^1.121.6",
+    "@testing-library/react-native": "*",
+    "@types/jest": "*",
+    "@types/react": "~19.1.10",
+    "jest": "*",
+    "jest-expo": "*",
+    "reactotron-react-native": "^5.1.18",
+    "reactotron-redux": "^3.2.1",
+    "typescript": "*"
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false
+      }
+    }
+  }
+}

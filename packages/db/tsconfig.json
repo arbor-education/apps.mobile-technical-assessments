@@ -1,0 +1,6 @@
+{
+  "extends": "../../packages/typescript-config/react-native-library.json",
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "indent": "  ",
+  "semverGroups": [
+    {
+      "label": "Expo packages must use exact versions",
+      "dependencies": ["expo", "expo-*"],
+      "packages": ["**"],
+      "range": ""
+    },
+    {
+      "label": "React packages must use exact versions",
+      "dependencies": ["react", "react-native", "react-dom"],
+      "packages": ["**"],
+      "range": ""
+    }
+  ],
+  "versionGroups": [
+    {
+      "label": "Internal Workspace Packages",
+      "dependencies": ["@arbor-apps/*"],
+      "pinVersion": "*"
+    },
+    {
+      "label": "Sub-package devDependencies use * (managed at root)",
+      "packages": ["pokedex", "@arbor-apps/eslint-config-custom"],
+      "dependencyTypes": ["dev"],
+      "isIgnored": true
+    },
+    {
+      "label": "Global Sync",
+      "dependencies": ["**"],
+      "packages": ["**"]
+    }
+  ]
+}

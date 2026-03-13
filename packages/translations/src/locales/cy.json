@@ -1,0 +1,38 @@
+{
+  "common": {
+    "loading": "Llwytho...",
+    "error": "Aeth rhywbeth o'i le.",
+    "retry": "Ailgeisio"
+  },
+  "auth": {
+    "title": "Pokédex",
+    "usernamePlaceholder": "Enw Defnyddiwr",
+    "passwordPlaceholder": "Cyfrinair",
+    "loginButton": "Mewngofnodi",
+    "invalidCredentials": "Enw defnyddiwr neu gyfrinair annilys."
+  },
+  "pokemon": {
+    "listTitle": "Pokédex",
+    "types": {
+      "normal": "Arferol", "fire": "Tân", "water": "Dŵr", "grass": "Glaswellt",
+      "electric": "Trydan", "ice": "Rhew", "fighting": "Ymladd",
+      "poison": "Gwenwyn", "ground": "Daear", "flying": "Hedfan",
+      "psychic": "Seicig", "bug": "Pryfed", "rock": "Craig", "ghost": "Ysbryd",
+      "dragon": "Draig", "dark": "Tywyll", "steel": "Dur", "fairy": "Tylwyth"
+    },
+    "status": {
+      "hunting": "Hela",
+      "caught": "Dal",
+      "shiny": "Disglair",
+      "ignored": "Anwybyddu"
+    }
+  },
+  "settings": {
+    "title": "Gosodiadau",
+    "language": "Iaith",
+    "theme": "Thema",
+    "dark": "Tywyll",
+    "light": "Golau",
+    "logout": "Allgofnodi"
+  }
+}
