@@ -66,3 +66,5 @@ local-docs
 
 # Google services
 **/google-services.json
+
+scripts
