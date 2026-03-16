@@ -67,6 +67,54 @@ export const deactivateActiveToken = (): void => {
   setTokens(tokens);
 };
 
+export const getStoredAccountCredentials = (
+  username: string,
+): { username: string; password: string } | null => {
+  const tokens = [...getTokens()].reverse();
+  for (const entry of tokens) {
+    try {
+      const parsed = parseToken(entry.token);
+      if (parsed.username === username) {
+        return { username: parsed.username, password: parsed.password };
+      }
+    } catch {
+      continue;
+    }
+  }
+  return null;
+};
+
+export const getAllStoredAccounts = (includeCurrent = false): string[] => {
+  const tokens = getTokens();
+  let activeUsername: string | null = null;
+
+  if (!includeCurrent) {
+    const activeToken = getActiveToken();
+    activeUsername = activeToken
+      ? parseToken(activeToken.token).username
+      : null;
+  }
+
+  console.log("tokens", tokens);
+  console.log("includeCurrent", includeCurrent);
+  console.log("activeUsername", activeUsername);
+
+  const usernames = tokens
+    .map((entry) => {
+      try {
+        return parseToken(entry.token).username;
+      } catch {
+        return null;
+      }
+    })
+    .filter((u): u is string => {
+      if (u === null) return false;
+      if (activeUsername && u === activeUsername) return includeCurrent;
+      return true;
+    });
+  return [...new Set(usernames)];
+};
+
 export enum StorageKeys {
   Theme = "Theme",
 }

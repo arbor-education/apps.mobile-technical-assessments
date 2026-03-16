@@ -30,6 +30,10 @@ export default function RootLayout() {
               name="pokemon/[id]"
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="switch-account"
+              options={{ headerShown: false }}
+            />
           </Stack>
         </ThemeWrapper>
       </QueryClientProvider>
