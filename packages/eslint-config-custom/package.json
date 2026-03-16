@@ -1,0 +1,22 @@
+{
+  "name": "@arbor-apps/eslint-config-custom",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "dependencies": {
+    "@eslint/js": "*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "@typescript-eslint/parser": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-prettier": "*",
+    "globals": "*"
+  },
+  "devDependencies": {
+    "eslint": "*",
+    "typescript": "*"
+  }
+}

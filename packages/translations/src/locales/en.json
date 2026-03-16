@@ -1,0 +1,50 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong.",
+    "retry": "Retry",
+    "back": "Back"
+  },
+  "auth": {
+    "title": "Pokédex",
+    "usernamePlaceholder": "Username",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Login",
+    "invalidCredentials": "Invalid username or password."
+  },
+  "pokemon": {
+    "listTitle": "Pokédex",
+    "types": {
+      "normal": "Normal", "fire": "Fire", "water": "Water", "grass": "Grass",
+      "electric": "Electric", "ice": "Ice", "fighting": "Fighting",
+      "poison": "Poison", "ground": "Ground", "flying": "Flying",
+      "psychic": "Psychic", "bug": "Bug", "rock": "Rock", "ghost": "Ghost",
+      "dragon": "Dragon", "dark": "Dark", "steel": "Steel", "fairy": "Fairy"
+    },
+    "filterByType": "Filter by type",
+    "allTypes": "All",
+    "noResults": "No Pokémon found.",
+    "recentlyViewed": "Recently Viewed",
+    "noRecentlyViewed": "No recently viewed Pokémon.",
+    "status": {
+      "hunting": "Hunting",
+      "caught": "Caught",
+      "shiny": "Shiny",
+      "ignored": "Ignored",
+      "notStarted": "Not Started",
+      "myStatus": "My Status"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "logout": "Logout",
+    "languageNames": {
+      "english": "English",
+      "cymraeg": "Cymraeg"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "@arbor-apps/typescript-config/react-native-library.json",
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules", "eslint.config.mjs"],
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@ui/*": ["./src/*"]
+    }
+  }
+}

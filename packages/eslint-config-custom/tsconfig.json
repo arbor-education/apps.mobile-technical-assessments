@@ -1,0 +1,11 @@
+{
+  "extends": "@arbor-apps/typescript-config/base.json",
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "types": [],
+    "moduleResolution": "node16"
+  }
+}

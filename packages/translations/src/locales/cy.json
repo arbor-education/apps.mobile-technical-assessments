@@ -1,0 +1,50 @@
+{
+  "common": {
+    "loading": "Llwytho...",
+    "error": "Aeth rhywbeth o'i le.",
+    "retry": "Ailgeisio",
+    "back": "Yn ol"
+  },
+  "auth": {
+    "title": "Pokédex",
+    "usernamePlaceholder": "Enw Defnyddiwr",
+    "passwordPlaceholder": "Cyfrinair",
+    "loginButton": "Mewngofnodi",
+    "invalidCredentials": "Enw defnyddiwr neu gyfrinair annilys."
+  },
+  "pokemon": {
+    "listTitle": "Pokédex",
+    "types": {
+      "normal": "Arferol", "fire": "Tân", "water": "Dŵr", "grass": "Glaswellt",
+      "electric": "Trydan", "ice": "Rhew", "fighting": "Ymladd",
+      "poison": "Gwenwyn", "ground": "Daear", "flying": "Hedfan",
+      "psychic": "Seicig", "bug": "Pryfed", "rock": "Craig", "ghost": "Ysbryd",
+      "dragon": "Draig", "dark": "Tywyll", "steel": "Dur", "fairy": "Tylwyth"
+    },
+    "filterByType": "Hidlo yn ôl math",
+    "allTypes": "Pob un",
+    "noResults": "Dim Pokémon wedi'i ganfod.",
+    "recentlyViewed": "Wedi'u Gweld yn Ddiweddar",
+    "noRecentlyViewed": "Dim Pokémon wedi'u gweld yn ddiweddar.",
+    "status": {
+      "hunting": "Hela",
+      "caught": "Dal",
+      "shiny": "Disglair",
+      "ignored": "Anwybyddu",
+      "notStarted": "Heb ei dechrau",
+      "myStatus": "Eich Statws"
+    }
+  },
+  "settings": {
+    "title": "Gosodiadau",
+    "language": "Iaith",
+    "theme": "Thema",
+    "dark": "Tywyll",
+    "light": "Golau",
+    "logout": "Allgofnodi",
+    "languageNames": {
+      "english": "English",
+      "cymraeg": "Cymraeg"
+    }
+  }
+}
