@@ -25,6 +25,7 @@ export const usePokemonList = () => {
   const activeType = useAppSelector((state) => state.filter.activeType);
   return useQuery({
     queryKey: pokemonQueryKeys.list(userId, activeType),
+    structuralSharing: false,
     queryFn: async () => {
       const pokemonQuery = activeType
         ? database.get<Pokemon>("pokemon").query(buildTypeQuery(activeType))
