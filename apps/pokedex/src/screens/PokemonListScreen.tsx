@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import { FlatList } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { FlatList, TextInput } from "react-native";
 import { router } from "expo-router";
 import {
   PokemonWithUserPokemon,
@@ -22,6 +22,18 @@ export const PokemonListScreen = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const { data: pokemon, isLoading, isError } = usePokemonList();
+  const [searchText, setSearchText] = useState("");
+  const [filteredPokemon, setFilteredPokemon] = useState(pokemon);
+
+  console.log(searchText);
+
+  useEffect(() => {
+    const results = pokemon?.filter((p) =>
+      p.name.toLowerCase().includes(searchText.toLowerCase()),
+    );
+    results?.sort((a, b) => a.name.localeCompare(b.name));
+    setFilteredPokemon(results ?? []);
+  }, [searchText]);
 
   const keyExtractor = useCallback((item: Pokemon) => item.id, []);
 
@@ -53,11 +65,26 @@ export const PokemonListScreen = () => {
 
   return (
     <PageContainer safeAreaTop>
+      <TextInput
+        value={searchText}
+        onChangeText={setSearchText}
+        placeholder="Search Pokémon..."
+        style={{
+          height: 40,
+          borderColor: "#ccc",
+          borderWidth: 1,
+          borderRadius: 8,
+          paddingHorizontal: 12,
+          marginHorizontal: 20,
+          marginBottom: 8,
+          backgroundColor: "#fff",
+        }}
+      />
       <TypeFilterChips />
       <RecentlyViewedSection />
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={pokemon}
+        data={filteredPokemon}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         removeClippedSubviews={true}
