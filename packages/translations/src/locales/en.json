@@ -24,6 +24,9 @@
     "filterByType": "Filter by type",
     "allTypes": "All",
     "noResults": "No Pokémon found.",
+    "searchPlaceholder": "Search Pokémon...",
+    "sortByName": "Sort: Name",
+    "sortById": "Sort: #",
     "recentlyViewed": "Recently Viewed",
     "noRecentlyViewed": "No recently viewed Pokémon.",
     "status": {

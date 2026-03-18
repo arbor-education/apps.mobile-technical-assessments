@@ -11,6 +11,8 @@ export { PageContainer } from "./PageContainer";
 export type { PageContainerProps } from "./PageContainer";
 export { TextInput } from "./TextInput";
 export type { TextInputProps } from "./TextInput";
+export { SearchBarInput } from "./SearchBarInput";
+export type { SearchBarInputProps } from "./SearchBarInput";
 export { YStack, XStack, View, useTheme } from "tamagui";
 export { TypeIcon } from "./TypeIcon";
 export { PokemonStatus } from "./PokemonStatus";

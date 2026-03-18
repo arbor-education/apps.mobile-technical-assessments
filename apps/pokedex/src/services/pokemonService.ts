@@ -13,23 +13,35 @@ const buildTypeQuery = (type: string) =>
 
 export const pokemonQueryKeys = {
   all: ["pokemon"] as const,
-  list: (userId: string | null, activeType: string | null) =>
-    ["pokemon", "list", userId, activeType] as const,
+  list: (
+    userId: string | null,
+    activeType: string | null,
+    searchText: string | null,
+  ) => ["pokemon", "list", userId, activeType, searchText] as const,
   detail: (id: string) => ["pokemon", id] as const,
   byType: (type: string) => ["pokemon", "type", type] as const,
   byIds: (ids: string[]) => ["pokemon", "byIds", ids] as const,
 };
 
+const buildNameQuery = (searchText: string) =>
+  Q.where("name", Q.like(`%${Q.sanitizeLikeString(searchText)}%`));
+
 export const usePokemonList = () => {
   const userId = useAppSelector((state) => state.user.userId);
   const activeType = useAppSelector((state) => state.filter.activeType);
+  const searchText = useAppSelector((state) => state.filter.searchText);
+  const sortOrder = useAppSelector((state) => state.filter.sortOrder);
   return useQuery({
-    queryKey: pokemonQueryKeys.list(userId, activeType),
+    queryKey: pokemonQueryKeys.list(userId, activeType, searchText),
     structuralSharing: false,
     queryFn: async () => {
-      const pokemonQuery = activeType
-        ? database.get<Pokemon>("pokemon").query(buildTypeQuery(activeType))
-        : database.get<Pokemon>("pokemon").query();
+      const conditions = [];
+      if (activeType) conditions.push(buildTypeQuery(activeType));
+      if (searchText) conditions.push(buildNameQuery(searchText));
+      const pokemonQuery =
+        conditions.length > 0
+          ? database.get<Pokemon>("pokemon").query(Q.and(...conditions))
+          : database.get<Pokemon>("pokemon").query();
       const pokemon = await pokemonQuery.fetch();
       const userPokemonList = userId
         ? await database
@@ -40,9 +52,17 @@ export const usePokemonList = () => {
       const userPokemonMap = new Map(
         userPokemonList.map((up) => [up.pokemonId, up]),
       );
-      return pokemon.map((p) =>
+      const result = pokemon.map((p) =>
         Object.assign(p, { userPokemon: userPokemonMap.get(p.id) ?? null }),
       ) as PokemonWithUserPokemon[];
+
+      if (sortOrder === "name") {
+        result.sort((a, b) => a.id.localeCompare(b.id));
+      } else {
+        result.sort((a, b) => a.id.localeCompare(b.id));
+      }
+
+      return result;
     },
   });
 };

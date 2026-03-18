@@ -24,6 +24,9 @@
     "filterByType": "Hidlo yn ôl math",
     "allTypes": "Pob un",
     "noResults": "Dim Pokémon wedi'i ganfod.",
+    "searchPlaceholder": "Search Pokémon...",
+    "sortByName": "Sort: Name",
+    "sortById": "Sort: #",
     "recentlyViewed": "Wedi'u Gweld yn Ddiweddar",
     "noRecentlyViewed": "Dim Pokémon wedi'u gweld yn ddiweddar.",
     "status": {

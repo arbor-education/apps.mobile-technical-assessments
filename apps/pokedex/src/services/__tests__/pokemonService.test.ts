@@ -7,22 +7,30 @@ import { pokemonQueryKeys } from "@pokedex/services/pokemonService";
 
 describe("pokemonQueryKeys", () => {
   describe("list", () => {
-    it("returns correct shape with userId and activeType", () => {
-      expect(pokemonQueryKeys.list("user-1", "fire")).toEqual([
+    it("returns correct shape with userId, activeType and searchText", () => {
+      expect(pokemonQueryKeys.list("user-1", "fire", "bulb")).toEqual([
         "pokemon",
         "list",
         "user-1",
         "fire",
+        "bulb",
       ]);
     });
 
     it("returns correct shape with null values", () => {
-      expect(pokemonQueryKeys.list(null, null)).toEqual([
+      expect(pokemonQueryKeys.list(null, null, null)).toEqual([
         "pokemon",
         "list",
         null,
         null,
+        null,
       ]);
+    });
+
+    it("includes searchText in key so search changes invalidate cache", () => {
+      const withSearch = pokemonQueryKeys.list("user-1", null, "pika");
+      const withoutSearch = pokemonQueryKeys.list("user-1", null, null);
+      expect(withSearch).not.toEqual(withoutSearch);
     });
   });
 

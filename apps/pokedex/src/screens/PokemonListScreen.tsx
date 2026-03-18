@@ -8,10 +8,13 @@ import {
 import { PokemonCard } from "@pokedex/components/PokemonCard";
 import { TypeFilterChips } from "@pokedex/components/TypeFilterChips";
 import { RecentlyViewedSection } from "@pokedex/components/RecentlyViewedSection";
+import { SearchBar } from "@pokedex/components/SearchBar";
+import { SortButton } from "@pokedex/components/SortButton";
 import { useTranslation } from "@arbor-apps/translations";
 import type { Pokemon } from "@arbor-apps/db";
 import {
   Text,
+  XStack,
   YStack,
   PageContainer,
   useTheme,
@@ -53,6 +56,12 @@ export const PokemonListScreen = () => {
 
   return (
     <PageContainer safeAreaTop>
+        <XStack px="$4" py="$2" gap="$2" items="center">
+            <YStack f={1}>
+                <SearchBar />
+        </YStack>
+        <SortButton />
+      </XStack>
       <TypeFilterChips />
       <RecentlyViewedSection />
       <FlatList
