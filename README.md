@@ -29,7 +29,7 @@ packages/
 
 ### `apps/pokedex`
 
-The main application. Built with Expo SDK 54, using file-based routing via expo-router.
+The main application. Built with Expo SDK 56, using file-based routing via expo-router.
 
 **Internal structure (`src/`):**
 
